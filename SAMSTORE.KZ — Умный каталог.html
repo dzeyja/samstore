@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SAMSTORE.KZ</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap">
+<style>
+:root{--bg:#fff;--ink:#111;--muted:#86868b;--line:#ebebed;--tile:#f5f5f7;--card:#fff;--accent:#111;--ok:#1a9d4b;--warn:#d98200;--off:#b0b0b5;--font:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-padding-top:100px}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.4;padding:env(safe-area-inset-top,0) 0 120px}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+header{position:sticky;top:0;z-index:40;background:var(--bg);border-bottom:1px solid var(--line)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0 10px;flex-wrap:wrap}
+.brand{font-size:18px;font-weight:800;letter-spacing:-.03em}.brand span{color:var(--muted)}
+.sub{font-size:12px;color:var(--muted)}
+.rate{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);white-space:nowrap}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--ok)}
+.head-r{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end}
+.contacts{display:flex;flex-direction:column;align-items:flex-end;gap:2px;text-align:right}
+.contacts b{font-size:12px;font-weight:600}.contacts span{font-size:11px;color:var(--muted)}
+.write{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:0 14px;border-radius:999px;border:0;background:var(--ink);color:var(--bg);font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap}
+.seg{display:flex;gap:22px}
+.seg button{border:0;border-bottom:2px solid transparent;background:none;color:var(--muted);padding:6px 0;min-height:40px;font-size:14px;font-weight:600;border-radius:0}
+.seg button.on{color:var(--ink);border-color:var(--ink)}
+.search{width:100%;min-height:46px;padding:0 16px;border-radius:12px;border:0;background:var(--tile);color:var(--ink);font:inherit;font-size:15px;margin:18px 0 10px}
+.filters{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 6px;scrollbar-width:none;flex:1;min-width:0}
+.chips::-webkit-scrollbar{display:none}
+.chip{border:1px solid var(--line);background:var(--tile);color:var(--muted);padding:0 16px;min-height:36px;border-radius:999px;font-weight:600;font-size:13px;white-space:nowrap;flex:none}
+.chip.on{color:var(--bg);background:var(--ink);border-color:var(--ink)}.chip small{display:none}
+.chip.tog.on{background:var(--ok);border-color:var(--ok);color:#fff}
+.cmp{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.cmp div{background:var(--bg);border-radius:10px;padding:10px 8px;text-align:center}
+.cmp span{display:block;font-size:11px;color:var(--muted);margin-bottom:4px}
+.cmp b{display:block;font-size:14px;font-weight:700;letter-spacing:-.02em;line-height:1.2}
+.cmp .hi{color:var(--ok)}
+@media(max-width:540px){.contacts{align-items:flex-start;text-align:left}.head-r{width:100%;justify-content:space-between}}
+.sec{margin-bottom:32px}
+.sec-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.sec-h h2{font-size:20px;font-weight:700;letter-spacing:-.02em}
+.all{border:0;background:none;color:var(--muted);font-size:13px;font-weight:500;padding:6px 0}
+.rail{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x proximity;scroll-padding:0 16px;margin:0 -16px;padding:0 16px 4px;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.rail .card{flex:none;width:200px;scroll-snap-align:start}
+@media(max-width:540px){.rail .card{width:156px}}
+.rail.wrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px 14px;overflow:visible;margin:0;padding:0}
+.rail.wrap .card{width:auto}
+@media(max-width:540px){.rail.wrap{grid-template-columns:repeat(2,1fr);gap:18px 12px}}
+.rw{position:relative}
+.ar{display:none;position:absolute;top:36%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--bg);font-size:20px;line-height:1;place-items:center;z-index:5}
+.ar.l{left:-10px}.ar.r{right:-10px}.ar[hidden]{display:none!important}
+@media(hover:hover) and (min-width:700px){.ar{display:grid}}
+.card{background:none;border:0;padding:0;display:flex;flex-direction:column;text-align:left}
+.tile{aspect-ratio:1;border-radius:14px;display:grid;place-items:center;background:var(--tile);color:var(--muted);margin-bottom:10px}
+.tile svg{width:38%;height:auto;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.st{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);margin-bottom:3px}
+.st i{width:6px;height:6px;border-radius:50%;background:var(--off)}
+.s-in i{background:var(--ok)}.s-st i{background:var(--warn)}.s-so i{background:var(--off)}
+.name{font-size:14px;font-weight:600;margin-bottom:6px}
+.cols{display:flex;gap:4px;margin-bottom:8px}
+.sw{width:10px;height:10px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(128,128,128,.4)}
+.pbox{margin-top:auto}
+.mo{font-size:16px;font-weight:700;letter-spacing:-.02em}
+.mo small{font-size:12px;font-weight:500;color:var(--muted)}
+.cash{font-size:12px;color:var(--muted);margin-top:2px}
+.empty{text-align:center;color:var(--muted);padding:48px 0;font-size:14px}
+.back{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:100;display:none;align-items:flex-end;justify-content:center}
+.back.open{display:flex}
+.sheet{background:var(--bg);width:100%;max-width:480px;max-height:92vh;overflow-y:auto;border-radius:20px 20px 0 0;padding:18px 18px 0;display:flex;flex-direction:column;gap:18px;animation:up .2s ease-out}
+@keyframes up{from{transform:translateY(20px);opacity:0}}
+@media(min-width:600px){.back{align-items:center}.sheet{border-radius:20px}}
+.sh{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.sh h3{font-size:20px;letter-spacing:-.02em}
+.x{width:36px;height:36px;border-radius:50%;border:0;background:var(--tile);font-size:14px;flex:none}
+.lbl{font-size:12px;color:var(--muted);margin-bottom:8px}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.opt{min-height:42px;padding:0 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg);font-weight:500;font-size:13px;display:flex;align-items:center;gap:8px}
+.opt.on{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.calc{background:var(--tile);border-radius:14px;padding:14px}
+.calc .seg{gap:2px;background:var(--bg);padding:3px;border-radius:10px}
+.calc .seg button{border:0;border-radius:8px;min-height:36px;color:var(--muted)}
+.calc .seg button.on{background:var(--ink);color:var(--bg)}
+.months{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:12px 0}
+.months .opt{flex-direction:column;gap:0;justify-content:center;padding:4px;min-height:48px;line-height:1.2}
+.months small{font-size:10px;font-weight:400;color:var(--muted)}
+.big{font-size:28px;font-weight:700;letter-spacing:-.03em;line-height:1.1}
+.big.tick{animation:tick .3s}
+@keyframes tick{from{opacity:.3;transform:translateY(4px)}}
+.note{font-size:12px;color:var(--muted);margin-top:6px}
+.cta{position:sticky;bottom:0;background:var(--bg);padding:10px 0 calc(14px + env(safe-area-inset-bottom,0))}
+.wa{width:100%;min-height:52px;border-radius:12px;border:0;background:var(--ink);color:var(--bg);font-size:15px;font-weight:600}
+.cta .note{text-align:center;margin:8px 0 0}
+.bar{position:fixed;left:16px;right:70px;bottom:calc(16px + env(safe-area-inset-bottom,0));max-width:400px;background:var(--ink);color:var(--bg);border-radius:12px;padding:10px 14px;display:none;align-items:center;gap:12px;z-index:70;font-size:13px}
+.bar.on{display:flex}.bar b{display:block;font-size:13px}.bar span{opacity:.65;font-size:12px}
+.bar .t{margin-left:auto;font-weight:700;font-variant-numeric:tabular-nums;font-size:16px}
+.bar button{border:0;background:none;color:inherit;opacity:.6;font-size:15px;padding:4px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.lg{display:flex;align-items:center;gap:10px}.lg img{width:40px;height:40px;border-radius:50%;display:block}
+.stp{position:absolute;top:8px;left:8px;z-index:2;display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:99px;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);font-size:11px;font-weight:600;color:#111;box-shadow:0 1px 3px rgba(0,0,0,.12);pointer-events:none}
+.stp i{width:6px;height:6px;border-radius:50%;background:var(--off)}.stp.s-in i{background:var(--ok)}.stp.s-st i{background:var(--warn)}
+.info{border:0;background:none;text-align:left;padding:0;display:flex;flex-direction:column;flex:1;width:100%}
+.gal{position:relative;border-radius:14px;overflow:hidden;background:var(--tile);margin-bottom:10px}
+.slides{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.slides::-webkit-scrollbar{display:none}
+.sl{flex:none;width:100%;aspect-ratio:1;scroll-snap-align:center;object-fit:cover;display:block}
+.ph{display:grid;place-items:center;color:var(--muted)}
+.ph svg{height:auto;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+#mGal .sl{aspect-ratio:4/3}
+.gb{display:none;position:absolute;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;border:0;background:rgba(255,255,255,.92);box-shadow:0 1px 4px rgba(0,0,0,.2);place-items:center;font-size:18px;line-height:1;color:#111}
+.gb.l{left:6px}.gb.r{right:6px}
+@media(hover:hover){.gal:hover .gb{display:grid}}
+.dots{position:absolute;bottom:8px;left:0;right:0;display:flex;justify-content:center;gap:5px;pointer-events:none}
+.dots i{width:5px;height:5px;border-radius:50%;background:rgba(0,0,0,.2)}.dots i.on{background:rgba(0,0,0,.65)}
+.months{grid-template-columns:repeat(auto-fit,minmax(74px,1fr))}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:13px;z-index:200;display:none}
+.toast.on{display:block}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="top">
+    <div class="lg"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAQDAwMDAgQDAwMEBAQFBgoGBgUFBgwICQcKDgwPDg4MDQ0PERYTDxAVEQ0NExoTFRcYGRkZDxIbHRsYHRYYGRj/2wBDAQQEBAYFBgsGBgsYEA0QGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBj/wAARCACgAKADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD7+ooooAKKKjnnhtreSe4lSKKNS7u5CqqgZJJPQD1oAkrnvGHjvwf4A0Bta8ZeI9O0WxXpLeTBN59EX7zn2UE18n/HP9ubTNDnuvDHwdittYv0Jjl1+4XdaQt0Pkp/y2I/vHCcfxV8K+J/Ffibxr4kl1/xdrt9rOpS/eubyUuVH91R0Rf9lQB7UrgfdfxB/wCCgnhjT3lsvhr4Tu9clGQNQ1VjaW+fVYwDIw+uyvnPxX+2J8ffFLSJH4ti0C3Y8Q6JaJAQP+ujbn/8erwkCnBeKVwN3VfHvjrXp2m1vxr4i1GRuS11qU0mfzbFYj3d5ISZLy5cnklpWP8AM0myl20AOhvr+3kD29/dxMOQ0czqR+Rrq9C+LnxU8MuG0H4jeJrHbwETUJGT/vliR+lcltpClAH0d4T/AG4vjj4ddE1i60jxPbrwV1G1EUhH/XSLbz7kGvpT4e/t4/C/xI8Vl40sL/wheNgGaUfarQn/AK6INy/8CXHvX5uFaaVPWi4H7haLrui+I9Gh1bQNWstTsJhmO6s5lmjf6MpIrQr8Wfh/8TvHfwu18av4G8RXWlyEgywKd0FwPSSI/K4+oz6EV9/fAv8AbS8J/EGe18NePooPC/iOUiOKcv8A6FeP0AV2/wBUx/utwezHpTuB9UUUA5GaKYBRRRQAUUVBeXlrp2nT399cRW9rbxtLNNKwVI0UZZmJ4AABJNAFPxB4g0Xwr4ZvfEPiHUrfTtLsYjPc3dw21I0Hc/yAHJJAHNfmV+0Z+1V4h+MF/ceGvDL3WjeCUYr9nzsn1HB4efHRO4i6f3snpU/af/aNv/jR4xbRNBuJrfwRps2bSDlDfyDj7TIPT+4p+6Oep48AApXAAM09V9qcq+1OApAIFpcUtFABRRRQAUYFFFACYFNK+1PooAhK00jqCOKnIphWgD6x/Zp/bA1PwPcWngj4oXs+oeGDiG11WTLz6aOgDnrJCP8Avpe2RwP0Wsr201HT4L+wuYbm1njWWKeFw6SIRkMrDggjvX4aEYr6v/ZD/aWm8A69bfDXxtfs3hW+lEdhdTvxpczHhcnpC5PI/hJz0JpgfpHRSAhlBByDS0wAkAZNfCv7dHx1dW/4Up4YvNpdFn1+aI87Tho7XPuMO/tsHc19a/Fr4haf8LPg5rvjjUAsi6fbFoYCf9fO3yxRj/ecqPpk9q/H/Uk8QeJtXuvFOv39r9t1aeS8lub+7jga4d2JZ1DHJXOQDjHGB0pMDCAqRRWiuhyf9BbQv/BnD/8AFVMuhTH/AJimh/8Agzh/xpAZlFan9gz/APQU0P8A8GcP+NH9gz/9BTQ//BnD/jQBl0VYvbG6066+z3kXlvtDqQwdXU9GVlJDKexBIqvQAUUUUAFFFFABRRRQAUhHpS0UARsKiZcggjg8VYIqNhQB+jv7FPx3k8deCX+G3ie9aXxBoUINpPM2XvLMYUZJ6vGSFPqpU+tfWVfij8PfHGsfDb4naN430NyLvTLgSmPOBNH0kiPsylh+PtX7L+FfEml+MPBWleKNEnE+n6lax3cDg9VdQQD7jofcGmgPiH/goJ8QTd634Z+FVncHyYwNX1FUbqzExwKfcDzW/FTXyVrN1Lba7qU8EaB1vJLcSFdwhjjZo0UL6bUVR2GD3NdD8evFx8dftSeL/ESzebbvqptbZu3kwEQpj2xHn8a5vVnW28UaldEzb2v7mNVSUxD/AF0hOWHPpgUMDqvh3qPgex8aTXfxR0zXNQ0J9NcLaaZdC3aK8cDy8lmXK4ycZ+XcpIIBFcBdxvFMoliaKQghkPXIYjtxyMdOD1q0yQTLHGHmUuv2lC6+acOMMGA/iBXg9wR0qvqE8c/2YxBhGkQjTd94hSQCffikBVpcn1NMzRu+lAGtIxm8EW28km2v5Io8/wAKPGrlR7bgWx6s3rWXWjn/AIon/uJf+0KzN3vQA6im7qN30oAdRTd30o3fSgB1FN3e9G73oAdRTd1LmgBaawpc00mgCJhzX6IfsBfENtZ+FesfDu9n3T6BcC4tFY8/ZpyTtHssgf8A77Ffng1e9fsa+L38K/tb6HbNMY7XXYpdJmGcBiy74/8Ax+NR+NCA8Gid3vFkkYs7ShmY9SS2Sa2tZ1Ca38U63AFikibULglJU3AHzm6f59fWsOJgsiMeQGBP4GvZv2fvhxoPxr/aYOh6/dTWukyC61WW3ik2TXCq+4Qqw6E7wSRztVsY6gA8ma/na5a5ZQZCMFvmHHp14HtVeSZpX3NjpgADAA9BX6P678FvhX/bd94Suv2V9Vt/DdujpD4q0ieJ7h3Cg7ljSUzkZyAWDcjlcGvmr9nj4MaF40/bA1PQ7iK41Xwh4YknurkataNbvOgJSGKeFwCrbjllIH+qbsaLAfOWSOtGT2r60/bB+F3gXS/CHgr4qfCnStLs/DOqKbOY6VEI4JGYeZBLgd2AkUn2WvXvCH7Pnw+8dfsE6Xc2XgvRYvFmoeGVmg1aO1UXJuthZWL9cllAJ9CaLAfAGT/whX/cS/8AaFZmSegzX6Lfs1/s7+Cl/ZUstZ+IHgrS9W1fWPN1cDUrUSPbRsm2FBu+78ihj7uaxfhT+z18PvD37M/h/wAfN8LW+K/ijWbaC8NobmJI4hKu7aolcRqqDgkhmLfkHYD4Dyc4wc0Zb0NfY/xV8M/BP4V+JfCfxD1H4KeIdJ8xpINT8F39vvsLkvC4BjuMvCJI32ttVvmXkAEGvSFT9nRv2QG+Pn/DPmiCyBI/sny4vO/4+vs/+sxt6/N9KVgPzwyc4oJI7Gvq/wAJ6P8AAjxHZeOP2jPFfgGXS/AulT22l6X4Os3XE92YkDlthUNlnXAyByxbOAKfr+gfAr48/s9+NvGXwx8DyeAfFng6zN/cWUZHlXUAVm5CnYcrG+CArKwGcg0AfJuT6Ubj6V+hXxI0L4afDD4Z+AtT0n9mfRfG9zrUMUdytpY/vIj5EbbztifJYsRzjnvXW2/7P/wYt/2qUs4/h/on2O/8KveTaRNbrJBBMl3EiyrGchGKuynHB2fWnYD8yMn0NG6v0S8TaJ4X8MR6xfXH7DlrNpGlieV9RS404I8EW4mYKW3AFV3Yxmvl/wCBFl4O+In7dOmQT+E7JfC+rX1/PFoVzGskMMRgleOMqPlO3C47cCkB4dkk4wfyo59DX6G+L/2cfhl4E8Q/Ej4x+LfA1rqfhfT7NG0fwppseyIKkMYkmdVIwTJu9lUO5ByAPmr4X/Fr4PaPpt9p3i/9nnTvFWsajq0k9oLFUCQRSBBHawo+5yFIbA5J3etAHgpB9DWx4N1uXw18SfD3iKFir6dqVvdAg4xskUn9M19y/Fm1/Z8+H3wDfU/FvwU8P+GPGGtWUy6X4ehWK4vYWZSqTOVwsYUkMTzgjAy3Ffn8MhVBbJA5Pv60AOQEkKuNxOBn1r1H4d+K/BPgD41WUnijwodX0PTp3t7qa3lkivvMXKm4ikV1KbXBxGpAK8EknNeXwHM0f++v860/EA/4rHWP+whcf+jWoA/QGD9o39nHw9rL+N7D4qfELVZvKPk+F5bi9mgRiuOIpQFz/vyFQTkVyPgv9p/4X+Efht48+Ikhs734geLNTfUH8MCOVQsQKwQW7z+XsO2INIzDqXavhvBowaAPtPUP2kPhR8Xf2WPFvw98W6Xpfw9vIo86FY2cUk8DSIPNjZPLiAj/AHilSMAYbPc1s+DP2nvhv4P/AGf/AIQaJbeKlOq6RdWUGuWS202YLYwyxTkts2tsLo2FJzt4zXwng0YPvRcD9KrL9rL4ST/EPxfdXvjGO28Mpp9lp+jzi0uNtzPtnknIQJlcb4l5A+7xXjHwR+MfwFtPgjaeDvEuveLvhvrkAAuNS0G+vEiu2U/61NhdEZ85dTGBnJHavk8A/wDCF5zz/aX/ALQrMwaLgfV37S/7RHgfxn8JNL+E/wAPLrWddsLW5iubrX9aaRpZjHuKhWl+d2LNkuQBgbQMHiKP4u/Dtf8AgmC3wpPiSP8A4S8sT/ZfkS7v+Qj5339uz7nzfe/WvlbbXqHwS8I+FvF3iDWbLxVaSXMMVrbmLy5njMW+5SOST5ZE4VGYliWVR8xVgMUAdP8AAr4o/DzS/h94m+EHxis79/BviGeO8S/sAWl0+5UKN+ACcHYhDAHBXkEE47HxX8SPgB8KfgL4t8BfAa91jxLrPi63Npf6xqSMqwQbWUqCyJk7WcBVXq5YngCuHvfA3w/0fSU1m0srbX7fT9JkvdXSXUnijhuvsULQQAxuGdJJZHcOp+Y5jAURnPR6P8HvCOs65Nb2Ph+PULK5vYp457PUXH2GEXluktpvab944g+1SksmVTY289gDrvj9+0zZXPwp+H+n/Bb4l6lbatp0YTU49O8+24W3QKr7lAcB1IxyOvY16Vo/7SnwNT9o+z8e33jK3g+0eDY9N1G6SyucG6W5SQR7RHngGTkDGO/Svn3UPgzoGp+GrLVzoLeDZpHhne3nunnhWFXuxKrySSlo9yxW43fMQ8irgBsifWvhL8PUtNOudDsAZ4jNKbOW8dzrCrFMwhiHngvJvSMEoY9gznzCRTuB7Frvjz9m3xFNqaah+1h8UfsepNL5+nR3lwLcRyZ3RBDan93glQvPHFeafCvUf2aPhl8UfC/jjSviFqsl9Y69qEFwl3FK8UemmK6jgm2rACWYfZ84OfnPyjtzni3wt4F0fwv4i0ex1i0gMenX95baNazR3Dx3ENyuGkuGzIItoQJErnzGTceF+bzi+8OWUHwesNZ0zw2moia28++1/wDtEhrG4+0Mn2byAwXGwRnDKWbzN4OBgID68s/2v/B13+1L4r0rxL4mjvvhVqelR2tjObOXy4pFjBkDR7N5EhklRiR/CnYVxn7PGv8A7LHwr8SeJtd1jxrbT6zDqs9toOoz2VzKItPKqYpI08ohJTuZGJ5+TAwDz454a8FfDTUPC2jeINevLiwt9RtpVuY45m32TWaMtzOob76yyyWYRecb5wPuCtn/AIVh4K0uGyXSbe28cSmeGw1Vk1j7JHYrGXjvLyJlYZTzUbZI+UVFUsp8wUAd18RdM/ZF8VjxB4tuvjt4v17xXcW8s0LXgciacITFH/x6gKm7ChQQAOBivkMZKru4bHP1r2jxT8Nfh7pXgbVL7RfGI1HWLWxjMdp5i5aaJ0kuXIz9w29xBsx1cTDHyV47BbS3d/DZwKWlnkWJFHdmIAH5mgDsvit4TbwN+0D4q8JmMpHYaxIkII6xM4kjP/fDrXP6/wD8jhrH/YQuP/RzV9V/t9eATovxh0H4jW0W201u3Wzu5B0FxBypJ/2oiP8Av2a+U/EIKeM9YVgQft9wcH3lYj9CKAKWKMe1ANOoAbj2ox7U6jvQBo4/4on/ALiX/tCszHtWqVK+CEZhjfqbbffbAufy3L+dZlADce1NaNHGHVWHXDDNSUUARGNcg7FJHQ46U+Jngm86BjFJtZN8Z2ttYFWGRzggkEdwSKXAowKAGtue2it3JaGHd5UZ5WPccttHQZIGcdaZ5MfP7pOevyjmpcCjAoAYEUAAKoA6ADpRsXeH2qWHRsc/nT8CjAoAtahql9qdtp1veSq8WnWos7VFQKI4w7PjA6ktI7FjySeaoGKMn5o1PflQalwKaaAImVf7o/KvT/2cvCjeM/2qvBGjGHzYI9RW/uARx5VuDM2fbKKPxrzBjzX23/wT38ANPrnij4nXkH7qGNdGsXZerttlnYH2AiX8TQB9SftEfC1fi7+z/rfhSGNDqioLzTHfot1HkoPYMNyH2c1+S8mpQSuIde0aSS8tx9neVbhoJTs+ULKNrAsuNucA/KAc4r9uyMjBr84P23PgdL4P+IB+Kfh6zP8AYWvTY1FI14tL0/xH0WXGf98N/eFNgfMi3nh3/oB3n/gx/wDtVO+1+Hv+gDef+DL/AO1Vig1KppAa32vw/wD9AK8/8GX/ANqo+1+H/wDoA3p/7iX/ANqrLHSloAuahqLX7QotvFa21upSC2iJKxgnLHJJLMx5LHrx0AAFOiigAooooAKKKKACiiigAoooJxQAhNRsacxqInNAFjT9Pv8AV9Zs9I0u1e7v72dLa2t4xlpZXYKqj6kiv2P+Dfw5s/hT8E9B8EWxSSWytwbqdR/r7hzvlf8AFycewFfHv7C3wMlv9Zb40eJbPFpal4NBilX/AFsn3ZLnnsoyin1LHsK+/egxTQBWP4p8MaJ4z8G6j4W8R2Ed9peowNb3FvJ0ZT6HsQcEEcggEdK2KKYH4/8Ax3+CHiH4IfEaTRtQEt3ot0zSaTqu3C3MX91uwlXIDL/wIcGvLlav2n+Ifw78K/FDwFeeEvF+nLd2FwNwZflkgkH3ZY2/hcdj9QcgkV+V/wAc/gD4v+B/ixrbU431Dw/cSEafrcSYjmHZJMf6uUd1PB6rkdEwPLAafmq4bFSBqQElFNDU7NABRRRQAUUUUAFFJmkLUAKTimlqaWphOaAFY17R+zj+z/q/xv8AH6/ao7i08JafIG1TUFBXf3+zxHvI3c/wjnrgGf8AZ9/Zq8VfG3XI9QnSfSPB8EmLrVmTBnx1itwfvv2LfdXvk8V+ovg7wd4c8BeDLHwt4V0yHTtLsk2RQRj82Y9WYnkseSaaQGhpGk6doOhWejaRZw2dhZwrb29tCu1Io1GFUD0AFXaKKYBRRRQAVm6/4f0TxT4du9B8RaXa6npt3GY57W6jDpIvuD+h6g8itKigD88fjn+w7r3h+e58R/B8Ta1pRJkfQpXzd249IWP+uUf3T8/+9Xx/c21zY30tle201tcwsUlgmQxvGw6hlIBB9jX7nV5x8TPgT8MPi3bY8ZeGYJ70Ltj1O2PkXcY9pV5I9myPalYD8dQxpwevsb4gf8E/fFenSy3fw38V2esW3VLHV/8ARrgewkUFG+pC184+Lvgr8WfAkj/8JT8P9csolOPtKW5nhP0kj3L+tIDid1G6oSdpIbKkdjxigNnvQBNupN1RFvelRXlkEcSPI54CoCxJ+goAeXppavR/B/7P/wAZvHRjfw78PNZe3kIxd3kYtIMeu+UrkfTNfSnw8/4J86hNLDffFDxhFbw8M2m6EN7t/stO4wP+AqfrQB8XaVpWqa9rVvo+iabd6lqFy2yG0tImllkPsq8mvtf4F/sLzSS23ib40kIgxJH4at5M7u4+0yqen+wh+rdq+ufh38Ivh38K9KNl4I8MWemlxiW6x5lxP/vytlm+mce1dvTsBV07TdP0fSrfTNKsoLKytoxFDb26BI40HRVUcAVaoopgFFFFAH//2Q==" alt="SAMSTORE.KZ"><div><div class="brand">SAMSTORE<span>.KZ</span></div><div class="sub">вкладывай с умом</div></div></div>
+    <div class="head-r">
+      <div class="contacts">
+        <b>Алматы · ул. Абая 150</b>
+        <span>Ежедневно 10:00–20:00</span>
+        <div class="rate" id="rate"></div>
+      </div>
+      <a class="write" id="write" href="#" target="_blank" rel="noopener">Написать</a>
+    </div>
+  </div>
+</div></header>
+<main class="wrap">
+  <section id="vS">
+    <input class="search" id="q" type="search" placeholder="Найти: MacBook, Dyson, PS5…" aria-label="Поиск" oninput="render()">
+    <div class="filters">
+      <button class="chip tog on" id="stock" type="button" onclick="toggleStock()">В наличии</button>
+      <div class="chips" id="chips"></div>
+    </div>
+    <div id="grid"></div>
+  </section>
+</main>
+
+<div class="back" id="modal" onclick="if(event.target===this)closeM()" role="dialog" aria-modal="true" aria-labelledby="mT">
+  <div class="sheet">
+    <div class="sh"><h3 id="mT"></h3><button class="x" onclick="closeM()" aria-label="Закрыть">✕</button></div>
+    <div id="mGal"></div>
+    <div id="gV"><div class="lbl">Конфигурация</div><div class="row" id="mV"></div></div>
+    <div id="gC"><div class="lbl">Цвет</div><div class="row" id="mC"></div></div>
+    <div class="calc">
+      <div class="seg" style="display:flex"><button style="flex:1" id="pC" onclick="pay('cash')">Сразу</button><button style="flex:1" class="on" id="pI" onclick="pay('inst')">В рассрочку</button></div>
+      <div class="months" id="mM"></div>
+      <div class="big" id="mBig"></div>
+      <div class="cmp" id="mCmp"></div>
+      <div class="note" id="mNote"></div>
+    </div>
+    <div class="cta"><button class="wa" onclick="book()">Забронировать на 2 часа</button><div class="note">Откроется WhatsApp с готовым сообщением</div></div>
+  </div>
+</div>
+<div class="bar" id="bar"><div><b id="bItem"></b><span>Бронь действует</span></div><div class="t" id="bTime"></div><button onclick="cancelB()" aria-label="Снять бронь">✕</button></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const PHONE="77000000000"; // WhatsApp магазина
+const ADDRESS="Алматы · ул. Абая 150";
+const HOURS="Ежедневно 10:00–20:00";
+const HOLD=2*3600, KEY="samstore_v4";
+const img=(id,w=800)=>`https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`;
+const I={
+ MacBook:'<rect x="12" y="14" width="40" height="28" rx="3"/><path d="M6 47h52l-4 4H10z"/>',
+ iPhone:'<rect x="19" y="7" width="26" height="50" rx="6"/><path d="M28 12h8"/>',
+ iPad:'<rect x="16" y="8" width="32" height="48" rx="4"/><path d="M29 50h6"/>',
+ "Apple Watch":'<rect x="20" y="18" width="24" height="28" rx="7"/><path d="M24 18l2-10h12l2 10M24 46l2 10h12l2-10"/>',
+ AirPods:'<path d="M26 8a9 9 0 0 0-9 9c0 5 3 8 6 11v22a3 3 0 0 0 6 0V28c3-3 6-6 6-11a9 9 0 0 0-9-9z"/>',
+ Dyson:'<circle cx="32" cy="18" r="10"/><path d="M32 28v16M26 44h12l-2 14h-8z"/>',
+ PlayStation:'<path d="M18 22h28a10 10 0 0 1 10 10l2 14a5 5 0 0 1-9 3l-5-7H20l-5 7a5 5 0 0 1-9-3l2-14a10 10 0 0 1 10-10z"/><path d="M22 30v6M19 33h6"/>',
+ Box:'<path d="M32 8l22 12v24L32 56 10 44V20z"/><path d="M10 20l22 12 22-12M32 32v24"/>'};
+const ORDER=["MacBook","iPhone","iPad","Apple Watch","AirPods","Dyson","PlayStation"];
+const col=(n,c)=>({n,c});
+const BLK=col("Black","#25262a"),SLV=col("Silver","#d9dadc"),MID=col("Midnight","#1e242b"),STL=col("Starlight","#efe3cf"),GRY=col("Space Gray","#6b6c71"),WHT=col("White","#fff");
+let P=[
+ {id:1,cat:"MacBook",name:"MacBook Air 13 M3",base:1090,st:"in",v:[["8/256 ГБ",0],["16/512 ГБ",240],["16/1 ТБ",420]],c:[MID,STL,GRY],imgs:[img("photo-1517336714731-489689fd1ca8"),img("photo-1611186871348-b1ce696e52c9"),img("photo-1541807084-5c52b6b3adef")]},
+ {id:2,cat:"MacBook",name:"MacBook Air 15 M3",base:1290,st:"in",v:[["8/256 ГБ",0],["16/512 ГБ",240],["16/1 ТБ",420]],c:[MID,SLV],imgs:[img("photo-1496181133206-80ce9b88a853"),img("photo-1517336714731-489689fd1ca8"),img("photo-1484788984921-03950022c9ef")]},
+ {id:3,cat:"MacBook",name:"MacBook Pro 14 M3",base:1590,st:"st",v:[["8/512 ГБ",0],["16/512 ГБ",220],["16/1 ТБ",400]],c:[col("Space Black","#2b2b2d"),SLV],imgs:[img("photo-1511385348-a52b4a160dc2"),img("photo-1611186871348-b1ce696e52c9"),img("photo-1525547719571-a2d4ac8945e2")]},
+ {id:14,cat:"iPhone",name:"iPhone 16 Pro",base:1120,st:"in",v:[["128 ГБ",0],["256 ГБ",110],["512 ГБ",290]],c:[col("Desert Titanium","#c5b49b"),col("Natural","#9a9895"),BLK],imgs:[img("photo-1510557880182-3d4d3cba35a5"),img("photo-1592750475338-74b7b21085ab"),img("photo-1695048133142-1a20484d2569")]},
+ {id:15,cat:"iPhone",name:"iPhone 16",base:850,st:"in",v:[["128 ГБ",0],["256 ГБ",100],["512 ГБ",280]],c:[BLK,WHT,col("Ultramarine","#7d8fe0"),col("Pink","#f0b6c8")],imgs:[img("photo-1591337676887-a217a6970a8a"),img("photo-1510557880182-3d4d3cba35a5"),img("photo-1556656793-08538906a9f8")]},
+ {id:16,cat:"iPhone",name:"iPhone 15",base:700,st:"st",v:[["128 ГБ",0],["256 ГБ",100]],c:[BLK,col("Blue","#9fb5c8"),col("Pink","#f0d5d3")],imgs:[img("photo-1695048133142-1a20484d2569"),img("photo-1592750475338-74b7b21085ab"),img("photo-1580910051074-3eb694886505")]},
+ {id:4,cat:"iPad",name:"iPad Air M2",base:620,st:"in",v:[["128 ГБ Wi-Fi",0],["256 ГБ Wi-Fi",110],["256 ГБ Cellular",240]],c:[col("Blue","#7898b5"),GRY],imgs:[img("photo-1544244015-0df4b3ffc6b0"),img("photo-1585790050230-5dd28404ccb9"),img("photo-1561154464-82e9adf32764")]},
+ {id:5,cat:"iPad",name:"iPad 10",base:380,st:"st",v:[["64 ГБ Wi-Fi",0],["256 ГБ Wi-Fi",130],["256 ГБ Cellular",250]],c:[SLV,col("Blue","#5784ba"),col("Pink","#de6d85")],imgs:[img("photo-1561154464-82e9adf32764"),img("photo-1544244015-0df4b3ffc6b0"),img("photo-1585790050230-5dd28404ccb9")]},
+ {id:6,cat:"Apple Watch",name:"Apple Watch Series 9",base:410,st:"in",v:[["41 мм",0],["45 мм",40]],c:[MID,STL],imgs:[img("photo-1434493789847-2f02dc6ca35d"),img("photo-1551816230-ef5deaed4a26"),img("photo-1579586337278-3befd40fd17a")]},
+ {id:7,cat:"Apple Watch",name:"Apple Watch SE",base:260,st:"in",v:[["40 мм",0],["44 мм",35]],c:[MID,SLV],imgs:[img("photo-1579586337278-3befd40fd17a"),img("photo-1434493789847-2f02dc6ca35d"),img("photo-1551816230-ef5deaed4a26")]},
+ {id:8,cat:"AirPods",name:"AirPods Pro 2 USB-C",base:245,st:"in",v:[["Стандарт",0]],c:[WHT],imgs:[img("photo-1600294037681-daacbf5cfd2f"),img("photo-1606220945770-b5b6c2c55bf1"),img("photo-1588423771073-b8903fbb85b5")]},
+ {id:9,cat:"AirPods",name:"AirPods 4",base:150,st:"in",v:[["Без шумоподавления",0],["С шумоподавлением",50]],c:[WHT],imgs:[img("photo-1606220945770-b5b6c2c55bf1"),img("photo-1600294037681-daacbf5cfd2f"),img("photo-1590658268037-6bf12165a8df")]},
+ {id:10,cat:"Dyson",name:"Dyson V15 Detect",base:690,st:"st",v:[["Absolute",0],["Complete",70]],c:[col("Yellow / Nickel","#eab308")],imgs:[img("photo-1558317374-067fb5f30001"),img("photo-1527515637462-cff94eecc1ac"),img("photo-1581578731548-c64695cc6952")]},
+ {id:11,cat:"Dyson",name:"Dyson Airwrap",base:590,st:"in",v:[["Complete Long",0],["Diffuser Edition",40]],c:[col("Prussian Blue","#1e3a5f"),col("Strawberry","#d96b70")],imgs:[img("photo-1522338140262-f46f5913618a"),img("photo-1487412947147-5cebf100ffc2"),img("photo-1516975080664-ed2fc6a32937")]},
+ {id:12,cat:"PlayStation",name:"PlayStation 5 Slim",base:530,st:"so",v:[["Digital Edition",0],["С дисководом",65]],c:[WHT],imgs:[img("photo-1606144042614-b2417e99c4e3"),img("photo-1622297845428-8ff157c218f0"),img("photo-1607853202273-797f1c22a38e")]},
+ {id:13,cat:"PlayStation",name:"DualSense",base:75,st:"in",v:[["Стандарт",0]],c:[WHT,col("Midnight Black","#25262a")],imgs:[img("photo-1607853202273-797f1c22a38e"),img("photo-1612287230202-1ff1d85d1e9d"),img("photo-1592840496694-26d195ea27d0")]}
+];
+// Условия рассрочки: срок (мес), наценка %, метка (необязательно)
+let PLANS=[{id:1,m:3,pct:0,label:""},{id:2,m:6,pct:8,label:""},{id:3,m:12,pct:16,label:""},{id:4,m:24,pct:32,label:""},{id:5,m:24,pct:0,label:"0·0·24"}];
+let ORD=[
+ {item:"MacBook Air 13 M3 (16/512, Midnight)",who:"Алишер · +7 701 ··· 44 12",terms:"Рассрочка 12 мес",sum:742400,s:0},
+ {item:"Dyson Airwrap (Complete Long)",who:"Дана · +7 707 ··· 89 01",terms:"Сразу",sum:283000,s:1},
+ {item:"iPad Air M2 (256 ГБ Wi-Fi, Blue)",who:"Тимур · +7 777 ··· 19 55",terms:"Рассрочка 6 мес",sum:379000,s:2}];
+let MIN=450,MAX=520,raw=480,RATE=480,lastA=Date.now();
+try{const S=JSON.parse(localStorage.getItem(KEY)||"null");if(S&&S.P)({P,PLANS,ORD,MIN,MAX,raw,RATE,lastA}=S)}catch(e){}
+const ST={in:["В магазине","В наличии в магазине","s-in"],st:["На складе","На складе, привезём завтра","s-st"],so:["Ожидается","Ожидается поставка","s-so"]};
+let f="Все",onlyIn=true,cur,vi=0,ci=0,mode="inst",pid=3,booking,timer;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const hex=c=>/^#[0-9a-f]{3,8}$/i.test(c)?c:"#ccc";
+const fmt=n=>Math.round(n).toLocaleString("ru-RU")+" ₸";
+const kzt=usd=>Math.round(usd*RATE/1000)*1000;
+const inst=(p,pl)=>{const t=Math.round(p*(1+pl.pct/100)/100)*100;return{t,m:Math.round(t/pl.m/100)*100,over:Math.max(0,Math.round(p*(pl.pct/100)/100)*100)}};
+const cats=()=>[...new Set([...ORDER.filter(c=>P.some(p=>p.cat===c&&(!onlyIn||p.st!=="so"))),...P.filter(p=>!onlyIn||p.st!=="so").map(p=>p.cat)])];
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify({P,PLANS,ORD,MIN,MAX,raw,RATE,lastA}))}catch(e){toast("Не удалось сохранить: слишком много фото")}};
+function toast(t){const e=$("toast");e.textContent=t;e.classList.add("on");setTimeout(()=>e.classList.remove("on"),2500)}
+function waLink(text){return`https://wa.me/${PHONE}?text=${encodeURIComponent(text||"Здравствуйте! Хочу уточнить по товару.")}`}
+function setupContacts(){
+  const c=document.querySelector(".contacts");
+  if(c){c.querySelector("b").textContent=ADDRESS;c.querySelector("span").textContent=HOURS}
+  $("write").href=waLink("Здравствуйте! Пишу с сайта SAMSTORE.KZ.");
+}
+// ===== Курс: обновляется раз в час =====
+const hs=t=>{const d=new Date(t);d.setMinutes(0,0,0);return+d};
+const tm=t=>new Date(t).toLocaleTimeString("ru-RU",{hour:"2-digit",minute:"2-digit"});
+const clamp=r=>Math.min(MAX,Math.max(MIN,r));
+function applyRate(){RATE=clamp(raw);lastA=Date.now();save();render();rateTxt();if($("modal").classList.contains("open"))opts()}
+function hourly(){if(hs(Date.now())>hs(lastA))applyRate()}
+function rateTxt(){$("rate").innerHTML=`<span class="dot"></span>1 $ = ${RATE} ₸ · обновлён в ${tm(lastA)}`}
+// ===== Галерея =====
+const SH=["#f5f5f7","#eeeef1","#f8f8fa"],SZ=[38,50,26];
+function imgsFor(p,colorIdx){
+  if(!(p.imgs&&p.imgs.length))return[];
+  const list=[...p.imgs];
+  if(colorIdx==null||list.length<2)return list;
+  const i=colorIdx%list.length;
+  const [picked]=list.splice(i,1);
+  return[picked,...list];
+}
+const slides=(p,colorIdx)=>{
+  const list=imgsFor(p,colorIdx);
+  if(list.length)return list.map(u=>`<img class="sl" src="${u}" alt="${esc(p.name)}" loading="lazy">`);
+  return[0,1,2].map(i=>`<div class="sl ph" style="background:${SH[i]}"><svg viewBox="0 0 64 64" style="width:${SZ[i]}%">${I[p.cat]||I.Box}</svg></div>`);
+};
+const gal=(p,click,colorIdx)=>{const s=slides(p,click?null:colorIdx);return `<div class="gal"><div class="stp ${ST[p.st][2]}"><i></i>${ST[p.st][click?0:1]}</div><div class="slides" ${click?`onclick="openM(${p.id})"`:""}>${s.join("")}</div><button class="gb l" onclick="gs(this,-1)" aria-label="Назад">‹</button><button class="gb r" onclick="gs(this,1)" aria-label="Вперёд">›</button>${s.length>1?`<div class="dots">${s.map((_,i)=>`<i class="${i?"":"on"}"></i>`).join("")}</div>`:""}</div>`};
+function gs(b,d){const s=b.parentNode.querySelector(".slides");s.scrollBy({left:d*s.clientWidth,behavior:"smooth"})}
+function sc(b,d){const r=b.parentNode.querySelector(".rail");r.scrollBy({left:d*r.clientWidth*.8,behavior:"smooth"})}
+function arrows(){document.querySelectorAll(".rw").forEach(w=>{const r=w.querySelector(".rail");w.querySelector(".l").hidden=r.scrollLeft<8;w.querySelector(".r").hidden=r.scrollLeft+r.clientWidth>=r.scrollWidth-8})}
+addEventListener("scroll",e=>{arrows();const t=e.target;if(t.classList&&t.classList.contains("slides")){const i=Math.round(t.scrollLeft/t.clientWidth);t.parentNode.querySelectorAll(".dots i").forEach((d,j)=>d.classList.toggle("on",j===i))}},true);
+addEventListener("resize",arrows);
+// ===== Каталог =====
+function toggleStock(){onlyIn=!onlyIn;$("stock").classList.toggle("on",onlyIn);chips();render()}
+function chips(){if(f!=="Все"&&!cats().includes(f))f="Все";
+  $("chips").innerHTML=["Все",...cats()].map(c=>`<button class="chip ${c===f?"on":""}" onclick="f=this.dataset.c;chips();render()" data-c="${esc(c)}">${esc(c)}</button>`).join("")}
+function render(){
+  const q=$("q").value.trim().toLowerCase(),all=f==="Все";
+  const ok=p=>(!onlyIn||p.st!=="so")&&p.name.toLowerCase().includes(q);
+  const cd=p=>{const k=kzt(p.base),mn=Math.min(...PLANS.map(x=>inst(k,x).m));
+    return `<article class="card">${gal(p,1)}<button class="info" onclick="openM(${p.id})"><div class="name">${esc(p.name)}</div><div class="cols">${p.c.map(x=>`<span class="sw" style="background:${hex(x.c)}"></span>`).join("")}</div><div class="pbox"><div class="mo">от ${fmt(mn)} <small>/ мес</small></div><div class="cash">или ${fmt(k)} сразу</div></div></button></article>`};
+  let h="";
+  (all?cats():[f]).forEach(c=>{const l=P.filter(p=>p.cat===c&&ok(p));if(!l.length)return;
+    h+=`<section class="sec"><div class="sec-h"><h2>${esc(c)}</h2>${all?`<button class="all" data-c="${esc(c)}" onclick="f=this.dataset.c;chips();render();scrollTo(0,0)">Смотреть все</button>`:`<button class="all" onclick="f='Все';chips();render()">‹ Все категории</button>`}</div><div class="rw"><button class="ar l" hidden onclick="sc(this,-1)" aria-label="Назад">‹</button><div class="rail ${all?"":"wrap"}">${l.map(cd).join("")}</div><button class="ar r" onclick="sc(this,1)" aria-label="Вперёд">›</button></div></section>`});
+  $("grid").innerHTML=h||`<div class="empty">${onlyIn?"Сейчас ничего в наличии. Снимите фильтр «В наличии».":"Ничего не нашли. Попробуйте другое название."}</div>`;
+  arrows();
+}
+// ===== Окно товара =====
+const cashP=()=>kzt(cur.base+cur.v[vi][1]);
+const plan=()=>PLANS.find(x=>x.id===pid)||PLANS[0];
+function openM(id){cur=P.find(p=>p.id===id);vi=ci=0;
+  $("mT").textContent=cur.name;
+  $("modal").classList.add("open");document.body.style.overflow="hidden";opts(true)}
+function closeM(){$("modal").classList.remove("open");document.body.style.overflow=""}
+function opts(refreshGal){
+  $("gV").style.display=cur.v.length>1?"":"none";
+  $("mV").innerHTML=cur.v.map((v,i)=>`<button class="opt ${i===vi?"on":""}" onclick="vi=${i};opts()">${esc(v[0])}</button>`).join("");
+  $("gC").style.display=cur.c.length>1?"":"none";
+  $("mC").innerHTML=cur.c.map((c,i)=>`<button class="opt ${i===ci?"on":""}" onclick="ci=${i};opts(1)"><span class="sw" style="background:${hex(c.c)};width:14px;height:14px"></span>${esc(c.n)}</button>`).join("");
+  if(refreshGal)$("mGal").innerHTML=gal(cur,0,ci);
+  const p=cashP(),pl=plan();pid=pl.id;
+  $("mM").style.display=mode==="inst"?"grid":"none";
+  $("mM").innerHTML=PLANS.map(x=>`<button class="opt ${x.id===pid?"on":""}" onclick="pid=${x.id};opts()">${x.m} мес<small>${x.label?esc(x.label):x.pct?"+"+x.pct+"%":"без %"}</small></button>`).join("");
+  const cmp=$("mCmp");
+  if(mode==="cash"){
+    $("mBig").textContent=fmt(p);
+    cmp.style.display="none";cmp.innerHTML="";
+    $("mNote").textContent="Оплата сразу. Цена по курсу "+RATE+" ₸/$.";
+  }else{
+    const r=inst(p,pl);
+    $("mBig").textContent=fmt(r.m)+" / мес";
+    cmp.style.display="grid";
+    cmp.innerHTML=`<div><span>Сейчас</span><b>${fmt(p)}</b></div><div><span>В месяц</span><b class="hi">${fmt(r.m)}</b></div><div><span>Переплата</span><b>${r.over?fmt(r.over):"0 ₸"}</b></div>`;
+    $("mNote").textContent=`Итого ${fmt(r.t)} за ${pl.m} мес${pl.label?" · "+pl.label:""}.`;
+  }
+  const b=$("mBig");b.classList.remove("tick");void b.offsetWidth;b.classList.add("tick")}
+function pay(m){mode=m;$("pC").classList.toggle("on",m==="cash");$("pI").classList.toggle("on",m==="inst");opts()}
+function book(){
+  const p=cashP(),pl=plan(),r=mode==="inst"?inst(p,pl):null,label=`${cur.name} (${cur.v[vi][0]}, ${cur.c[ci].n})`;
+  const terms=r?`Рассрочка ${pl.m} мес${pl.label?" ("+pl.label+")":""}`:"Сразу";
+  let t=`Здравствуйте! Хочу забронировать ${label}. Цена: ${fmt(p)}.`+(r?` ${terms} (${fmt(r.m)}/мес).`:"")+" Приеду в магазин через час.";
+  ORD.unshift({item:label,who:"Новый клиент · с сайта",terms,sum:r?r.t:p,s:0,fresh:1});save();
+  booking={end:Date.now()+HOLD*1000};$("bItem").textContent=cur.name;$("bar").classList.add("on");tick();clearInterval(timer);timer=setInterval(tick,1000);
+  window.open(waLink(t),"_blank");closeM()}
+function tick(){if(!booking)return;const s=Math.max(0,Math.round((booking.end-Date.now())/1000));
+  $("bTime").textContent=`${Math.floor(s/3600)}:${String(Math.floor(s%3600/60)).padStart(2,"0")}:${String(s%60).padStart(2,"0")}`;if(!s)cancelB()}
+function cancelB(){booking=null;clearInterval(timer);$("bar").classList.remove("on")}
+addEventListener("keydown",e=>{if(e.key==="Escape")closeM()});
+
+setInterval(hourly,30000);
+setupContacts();hourly();chips();render();rateTxt();
+
+</script>
+</body>
+</html>
